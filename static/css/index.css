@@ -1,0 +1,74 @@
+#top
+{
+    margin-top: -6rem;
+    position: relative;
+}
+
+.top-img-div
+{
+    width: 100%;
+}
+
+img
+{
+    width: 100%;
+    height: auto;
+}
+
+.motive
+{
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    color: white;
+    padding: 20% 15%;
+}
+
+.motive-line
+{
+    font-size: 3rem;
+}
+
+.join-us-btn{
+    width: 30%;
+}
+
+#reg-section
+{
+    width: 100%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: white;
+}
+
+
+.reg
+{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 3% 10%;
+}
+
+.underline{
+    width: 15%;
+    border-bottom: 3px;
+    border: 3px;
+    margin-left: 42.5%;
+}
+
+
+.orphan-reg
+{
+    height: 100%;
+}
+
+.old-reg
+{
+    height: 100%;
+}
+
+.ngo-reg
+{
+    height: 100%;
+}
