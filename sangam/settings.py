@@ -26,17 +26,27 @@ SECRET_KEY = 'ze)th763)+t-e$sru6axnylr6)nv@=kg=@xmt5za23%#i57a32'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Application definition
 
 INSTALLED_APPS = [
+    'first.apps.FirstConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_chatter.apps.ChatterConfig',
+    'channels',
 ]
 
 MIDDLEWARE = [
