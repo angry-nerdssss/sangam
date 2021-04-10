@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{%load static%}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="form-group container">
+  <form method="POST" action="/register" enctype="multipart/form-data">
+    <h2>Registration Form</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-group">
+      <label for="email">Enter your email</label><label id="email-error"
+        style="color: red; font-size:small;"></label><label id="email-success"
+        style="color: green; font-size:small;"></label>
+      <input id="id_email" type="email" name="email" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="password">Enter your password</label>
+      <input type="password" name="password" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="description">description</label><label id="description-error"
+        style="color: red; font-size:small;"></label><label id="description-success"
+        style="color: green; font-size:small;"></label>
+      <textarea id="id_description" rows="3" name="description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="contact">contact</label><label id="contact-error" style="color: red; font-size:small;"></label><label
+        id="contact-success" style="color: green; font-size:small;"></label>
+      <input id="id_contact" type="text" name="contact" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-outline-light btn-lg">Submit</button>
+  </form>
+</div>
+
+{% endblock %}
