@@ -5,8 +5,7 @@
     box-sizing : border-box;
 }
 
-body
-{
+body{
     background-image: url('../images/login.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -49,13 +48,11 @@ body
     text-align: center;
 }
 
-.container label
-{
+.container label{
     color: white;
 }
 
-form .btn
-{
+form .btn{
     margin: 5% 0;
     margin-left: 33%;
     width: 33%;

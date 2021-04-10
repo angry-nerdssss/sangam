@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{%load static%}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-group container">
+    <form method="POST" action="{% url 'hosting_event' slug %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <label class="col-form-label" for="meeting_date">Sender</label>
+                <input class="form-control" name="sender" value="{{ sender_name }}" disabled>
+            </div>
+            <div class="col">
+                <label class="col-form-label" for="meeting_date">Reciever</label>
+                <input class="form-control" name="reciever" value="{{ reciever_name }}" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="col-sm-2 col-form-label" for="meeting_date">Meeting date:</label>
+            <input class="form-control" type="date" id="start" name="date" value="2021-04-22" min="2021-01-01"
+                max="2023-12-31">
+        </div>
+        <div class="form-row">
+            <label class="col-sm-2 col-form-label" for="location">Venue : </label>
+            <input class="form-control" type="text" name="venue" placeholder="enter your decided venue">
+        </div>
+        <button type="submit" class="btn btn-lg btn-outline-light">Submit</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

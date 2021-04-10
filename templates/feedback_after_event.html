@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{%load static%}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-group container">
+    <form method="POST" action="{% url 'feedback_after_event' feedback_for.id %}">
+        {% csrf_token %}
+        <h2>Feedback for meeting with {{ feedback_for.username }}</h2>
+        <div class="form-group">
+            <label for="day">How was your day : </label>
+            <textarea class="form-control" type="text" name="how_day" placeholder="enter your experience"
+                rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="other">How do you feel about the above organisation : </label>
+            <textarea class="form-control" type="text" name="how_other" placeholder="enter your experience"></textarea>
+        </div>
+        <label for="other">Rate this meeting: </label>
+        <select class="rating form-control" name="rate">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option selected value="5">5</option>
+        </select>
+        <button type="submit" class="btn btn-lg btn-outline-light">Submit</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

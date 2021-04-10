@@ -1,0 +1,73 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/notification.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<section class="notification_section">
+    <h1>Notifications :</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Type</th>
+                <th scope="col">Sender</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notification in notifications1 %}
+            <tr>
+                <th scope="row">1</th>
+                <td>New Invitation</td>
+                <td><a href="{% url 'profile2' notification.sender.id %}">{{notification.sender.username}}</a></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+            {% for notification in notifications3 %}
+            <tr>
+                <th scope="row">1</th>
+                <td>Feedback Form</td>
+                <td><a
+                        href="{% url 'feedback_after_event' notification.sender.id %}">{{notification.sender.username}}</a>
+                </td>
+                <td></td>
+            </tr>
+            {% endfor %}
+            {% for notification in notifications2 %}
+            <tr>
+                <th scope="row">1</th>
+                <td>Feedback Form</td>
+                <td><a
+                        href="{% url 'feedback_after_event' notification.reciever.id %}">{{notification.sender.username}}</a>
+                </td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+
+
+
+<!-- {% for notification in notifications3 %}
+<p>Feedback Form</I></p>
+<a href="{% url 'feedback_after_event' notification.sender.id %}">
+    <p>{{notification.sender.username}}</p>
+</a>
+{% endfor %}
+{% for notification in notifications2 %}
+<p>Feedback Form</I></p>
+<a href="{% url 'feedback_after_event' notification.reciever.id %}">
+    <p>{{notification.reciever.username}}</p>
+</a> -->
+<!-- {% endfor %} -->
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
