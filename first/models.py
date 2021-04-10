@@ -2,15 +2,6 @@ from django.db import models
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
-"""class PasswordField(forms.CharField):
-    widget = forms.PasswordInput
-class PasswordModelField(models.CharField):
-    def formfield(self, **kwargs):
-        defaults = {'form_class': PasswordField}
-        defaults.update(kwargs)
-        return super(PasswordModelField, self).formfield(**defaults)"""
-
-
 class Organisation(models.Model):
     NGOs = 'NGOs'
     ORPHANAGE = 'ORPHANAGE'
@@ -125,3 +116,12 @@ class Hosting(models.Model):
     feedback_done=models.BooleanField(default=False)
     def _str_(self):
         return (self.sender.username+self.reciever.username)
+
+class Feedback_after_event(models.Model):
+    feedback_by=models.ForeignKey(Organisation, on_delete=models.CASCADE,related_name='feedback_r')
+    feedback_for=models.ForeignKey(Organisation, on_delete=models.CASCADE,related_name='feedback_s')
+    how_day=models.CharField(max_length=100)
+    how_other=models.CharField(max_length=100)
+    rate=models.IntegerField()
+    def _str_(self):
+        return self.how_other

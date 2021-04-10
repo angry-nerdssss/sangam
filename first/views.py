@@ -11,20 +11,9 @@ from django.contrib.sessions.models import Session
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
-#from django_email_verification import sendConfirm
 from taggit.models import Tag
 from datetime import datetime, timedelta
 from .forms import OrganisationForm
-# organisation name
-# category
-# organisation email
-# contact no
-# description
-# motto
-# location
-# certifiacte
-# two conditions are required 1)validation of email, 2)verification by admin
-
 
 def index(request):
     return render(request, "index.html")
@@ -304,3 +293,28 @@ def hosting_event(request, slug):
             'slug': slug,
         }
         return render(request, 'hosting_page.html', ctx)
+
+
+# this function is to take feedback
+
+
+def feedback(request):
+    name = request.POST['name']
+    email = request.POST['email']
+    subject = request.POST['subject']
+    message = request.POST['message']
+    feed = Feedback(name=name, email=email, subject=subject, message=message)
+    # by writing this only we are hitting the database to store the information
+    feed.save()
+    return HttpResponseRedirect(reverse('index'))
+    # return HttpResponseRedirect(reverse(request.path_info))
+
+# this function is to show feedbacks from users to the admin
+
+
+def show_feedback(request):
+    feedbacks = Feedback.objects.all()
+    context = {
+        'feedbacks': feedbacks,
+    }
+    return render(request, 'feedback.html', context)
