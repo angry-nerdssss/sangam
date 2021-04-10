@@ -20,4 +20,5 @@ urlpatterns = [
     path('feedback_after_event/<int:id>/',views.feedback_after_event,name='feedback_after_event'),
     path('hosting_event/<slug:slug>/',views.hosting_event,name='hosting_event'),
    
+    path('about', views.about, name='about'),
 ]

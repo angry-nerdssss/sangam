@@ -351,3 +351,5 @@ def show_feedback(request):
         'feedbacks': feedbacks,
     }
     return render(request, 'feedback.html', context)
+def about(request):
+    return render(request, 'about.html')

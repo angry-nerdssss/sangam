@@ -1,0 +1,51 @@
+.container 
+{
+    margin : 2rem auto;
+    width : 1000px;
+    max-width : 90%;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 2rem;
+}
+
+.container .image-div{
+    width: 100%;
+    height: auto;
+}
+
+.image-div img{
+    width: 100%;
+}
+
+.container h1
+{
+    text-align: center;
+    font-size: 30px;
+}
+
+.container h2
+{
+    text-align: left;
+}
+
+textarea{
+    padding-top:10px;
+    padding-bottom:25px; /* increased! */
+    display:block
+}
+
+.container .card{
+    width: 100%;
+    margin: 2rem 0;
+    padding: 2rem;
+    background-color: white;
+}
+
+.card-body
+{
+    position: relative;
+    width: 100%;
+}
+
+.fa-star{
+    color: orange;
+}
