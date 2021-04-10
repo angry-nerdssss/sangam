@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<body>
+    <div class="container">
+        <h1>PROFILE</h1>
+        <br>
+        <h2>{{org.organisation_name}}</h2>
+        <br>
+        <h2>{{org.contact}}</h2>
+        <br>
+        <h2>{{org.email}}</h2>
+        <br>
+        <h2>{{org.city}}</h2>
+        <br>
+        <h2>{{org.description}}</h2>
+        <br>
+        <br>
+        <a href="{% url 'django_chatter:get_chat_url2' org.slug %}" ><input type="submit" class="btn" value="CHAT WITH ORGANIZATION"></a>
+        {% if case is 0 %}
+        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Send Invitation"></a>
+        {% elif case is 1 %}
+        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Invitation accepted"></a>
+        {% elif case is 2 %}
+        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Invitation Sent"></a>
+        {% elif case is 3 %}
+        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Invitation accepted"></a>
+        {% elif case is 4 %}
+        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Accept Invitation"></a>
+        {% endif %}
+        {% if host_allow is 1 %}
+        <a href="{% url 'hosting_event' org.slug %}" ><input type="submit" class="btn" value="Host The Event"></a>
+        {% endif %}
+    </div>
+</body>
+
+{% endblock content %}
+
