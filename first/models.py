@@ -3,47 +3,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 class Organisation(models.Model):
-    NGOs = 'NGOs'
-    ORPHANAGE = 'ORPHANAGE'
-    OLD_AGE_HOMES = 'OLD AGE HOMES'
-    LUCKNOW = 'LUCKNOW'
-    MUMBAI = 'MUMBAI'
-    KOLKATA = 'KOLKATA'
-    CHENNAI = 'CHENNAI'
-    HYDERABAD = 'HYDERABAD'
-    JAIPUR = 'JAIPUR'
-    PUNE = 'PUNE'
-    BANGLORE = 'BANGLORE'
-    DELHI = 'DELHI'
-    PATNA = 'PATNA'
-    DEHRADUN = 'DEHRADUN'
-    COIMBATORE = 'COIMBATORE'
-    PRAYAGRAJ = 'PRAYAGRAJ'
-    AYODHYA = 'AYODHYA'
-    GANGTOK = 'GANGTOK'
-    CATEGORY_CHOICES = [
-
-        (NGOs, 'NGOs'),
-        (ORPHANAGE, 'ORPHANAGE'),
-        (OLD_AGE_HOMES, 'OLD AGE HOMES'),
-    ]
-    CITY_CHOICES = [
-        (LUCKNOW, 'LUCKNOW'),
-        (MUMBAI, 'MUMBAI'),
-        (KOLKATA, 'KOLKATA'),
-        (CHENNAI, 'CHENNAI'),
-        (HYDERABAD, 'HYDERABAD'),
-        (JAIPUR, 'JAIPUR'),
-        (PUNE, 'PUNE'),
-        (BANGLORE, 'BANGLORE'),
-        (DELHI, 'DELHI'),
-        (PATNA, 'PATNA'),
-        (DEHRADUN, 'DEHRADUN'),
-        (COIMBATORE, 'COIMBATORE'),
-        (PRAYAGRAJ, 'PRAYAGRAJ'),
-        (AYODHYA, 'AYODHYA'),
-        (GANGTOK, 'GANGTOK'),
-    ]
+    
     organisation_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
     description = models.CharField(max_length=200)
@@ -66,3 +26,13 @@ class Invitation(models.Model):
     accepted_or_not=models.BooleanField(default=False)
     def _str_(self):
         return (self.sender.username+self.reciever.username)
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254)
+    subject = models.CharField(max_length=200)
+    message = models.CharField(max_length=200)
+
+    def _str_(self):
+        return self.name

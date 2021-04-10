@@ -50,7 +50,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'sangam.urls'
-
+ASGI_APPLICATION = "sangam.routing.application"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

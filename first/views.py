@@ -1,12 +1,3 @@
-from .models import Organisation, Invitation, Hosting, Feedback_after_event,Feedback
-import math
-from .models import Organisation, Invitation
-from django.shortcuts import render, redirect, get_object_or_404, reverse
-
-from django.contrib import messages
-from django.contrib.auth.models import User, auth
-from django.template.defaultfilters import slugify
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 
 def index(request):
     return render(request, "index.html")
@@ -81,4 +72,20 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+def subString(Str, n):
+    strings = []
+    for l in range(1, n + 1):
+        for i in range(n - l + 1):
+            j = i + l - 1
+            util_string = ""
+            for k in range(i, j + 1):
+                util_string = util_string+Str[k]
+
+            x = len(Str)
+            x = x//2
+            if len(util_string) > x:
+                strings.append(util_string)
+    return strings
 
