@@ -112,3 +112,16 @@ class Don(models.Model):
     zp = models.CharField(max_length=100)
     def __str__(self):
         return self.name
+
+class Hosting(models.Model):
+    # sender=models.OneToOneField(User,on_delete=models.CASCADE,related_name='host_s')#senders invitation 
+    
+    # reciever=models.OneToOneField(User,
+    #         on_delete=models.CASCADE, related_name='host_r')
+    sender=models.ForeignKey(User, on_delete=models.CASCADE,related_name='host_s')
+    reciever=models.ForeignKey(User, on_delete=models.CASCADE,related_name='host_r')
+    meeting_date=models.DateField()
+    venue=models.CharField(max_length=100)
+    feedback_done=models.BooleanField(default=False)
+    def _str_(self):
+        return (self.sender.username+self.reciever.username)

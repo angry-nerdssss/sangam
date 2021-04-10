@@ -225,3 +225,82 @@ def profile2(request, id):
         'host_allow': host_allow,
     }
     return render(request, 'profile.html', ctx)
+
+
+def fundraise(request):
+    return render(request, 'fundraiser.html')
+
+
+def monthly_donation(request):
+    return render(request, 'monthly_donation.html')
+
+
+@login_required(login_url='login')
+def send_invitation(request, slug):
+    organisation = get_object_or_404(Organisation, slug=slug)
+    reciever = User.objects.get(username=organisation.organisation_name)
+    sender = User.objects.get(username=request.user.username)
+    invitation1 = Invitation.objects.filter(
+        sender=sender).filter(reciever=reciever)
+    invitation2 = Invitation.objects.filter(
+        sender=reciever).filter(reciever=sender)
+    if invitation1.exists():
+        return redirect('profile', slug)
+    if invitation2.exists():
+        invitation = invitation2[0]
+        print("shi")
+        invitation.accepted_or_not = True
+        invitation.save()
+        return redirect('profile', slug)
+    invitation = Invitation.objects.create(
+        sender=sender, reciever=reciever, accepted_or_not=False)
+    invitation.save()
+    return redirect('profile', slug)
+
+
+@login_required(login_url='login')
+def notification(request):
+    notifications1 = Invitation.objects.filter(
+        reciever=request.user).filter(accepted_or_not=False)
+    notifications2 = Hosting.objects.filter(sender=request.user)
+    notifications3 = Hosting.objects.filter(reciever=request.user)
+    notifications2 = notifications2.filter(feedback_done=False)
+    deadline = datetime.now().date()-timedelta(1)
+    notifications2 = notifications2.filter(meeting_date=deadline)
+    print(deadline)
+    print("\n")
+    print()
+    notifications3 = notifications3.filter(feedback_done=False)
+    notifications3 = notifications3.filter(meeting_date=deadline)
+    print(notifications3.count())
+    print(notifications2.count())
+    ctx = {
+        'notifications1': notifications1,
+        'notifications2': notifications2,
+        'notifications3': notifications3,
+    }
+    return render(request, 'notification.html', ctx)
+
+
+@login_required(login_url='login')
+def hosting_event(request, slug):
+    if request.method == 'POST':
+        organisation = get_object_or_404(Organisation, slug=slug)
+        reciever = User.objects.get(username=organisation.organisation_name)
+        sender = User.objects.get(username=request.user.username)
+        date = request.POST['date']
+        venue = request.POST['venue']
+        hosting = Hosting.objects.create(
+            sender=sender, reciever=reciever, meeting_date=date, venue=venue)
+        hosting.save()
+        return redirect('profile', slug)
+    else:
+        organisation = get_object_or_404(Organisation, slug=slug)
+        reciever = User.objects.get(username=organisation.organisation_name)
+        sender = User.objects.get(username=request.user.username)
+        ctx = {
+            'sender_name': sender.username,
+            'reciever_name': reciever.username,
+            'slug': slug,
+        }
+        return render(request, 'hosting_page.html', ctx)
