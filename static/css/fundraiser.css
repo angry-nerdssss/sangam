@@ -30,7 +30,7 @@ body{
     padding: 5% 10%;
 }
 
-.container form h2
+.container form h2,p
 {
     text-align: center;
     margin-bottom: 24px;

@@ -1,17 +1,19 @@
-body
-{
-    background-image: url('../images/login.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}
-
 .container 
 {
-    margin : auto;
-    width : 80%;
-    background-color: white; 
-    padding: 5% 10%;
+    margin : 2rem auto;
+    width : 1000px;
+    max-width : 90%;
+    background-color: white;
+    padding: 2rem;
+}
+
+.container .image-div{
+    width: 100%;
+    height: auto;
+}
+
+.image-div img{
+    width: 100%;
 }
 
 .container h1
@@ -20,16 +22,20 @@ body
     font-size: 30px;
 }
 
-
 .container h2
 {
     text-align: left;
 }
 
-.container .btn
-{
-    margin : auto;
-    border-radius: 4px;
-    background-color : black;
-    color : white;
+textarea{
+    padding-top:10px;
+    padding-bottom:25px; /* increased! */
+    display:block
+}
+.container .card{
+    width: 100%;
+}
+
+.fa-star{
+    color: orange;
 }

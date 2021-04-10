@@ -14,5 +14,10 @@ urlpatterns = [
     path('profile/<slug:slug>/', views.profile, name='profile'),
     path('profile2/<int:id>/', views.profile2, name='profile2'),
     path('fundraise', views.fundraise, name='fundraise'),
+       path('monthly_donation', views.monthly_donation, name='monthly_donation'),
+    path('send_invitation/<slug:slug>/', views.send_invitation, name='send_invitation'),
+    path('notification',views.notification,name='notification'),
+    path('feedback_after_event/<int:id>/',views.feedback_after_event,name='feedback_after_event'),
+    path('hosting_event/<slug:slug>/',views.hosting_event,name='hosting_event'),
    
 ]

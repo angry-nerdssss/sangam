@@ -68,14 +68,6 @@ class Organisation(models.Model):
     def __str__(self):
         return self.organisation_name
 
-class Invitation(models.Model):
-    #sender=models.OneToOneField(User,on_delete=models.CASCADE,related_name='sent_invitation')#senders invitation 
-    sender=models.ForeignKey(User, on_delete=models.CASCADE,related_name='sent_invitation')
-    reciever=models.ForeignKey(User, on_delete=models.CASCADE,related_name='reciever_invitation')
-    accepted_or_not=models.BooleanField(default=False)
-    def _str_(self):
-        return (self.sender.username+self.reciever.username)
-
 
 class Feedback(models.Model):
     name = models.CharField(max_length=100)
@@ -85,6 +77,14 @@ class Feedback(models.Model):
 
     def _str_(self):
         return self.name
+
+class Invitation(models.Model):
+    #sender=models.OneToOneField(User,on_delete=models.CASCADE,related_name='sent_invitation')#senders invitation 
+    sender=models.ForeignKey(User, on_delete=models.CASCADE,related_name='sent_invitation')
+    reciever=models.ForeignKey(User, on_delete=models.CASCADE,related_name='reciever_invitation')
+    accepted_or_not=models.BooleanField(default=False)
+    def _str_(self):
+        return (self.sender.username+self.reciever.username)
 
 
 class Fund(models.Model):
@@ -97,5 +97,18 @@ class Fund(models.Model):
     state = models.CharField(max_length=100)
     zp = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
+
+class Don(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254)
+    address = models.CharField(max_length=254)
+    phn = models.CharField(max_length=100)
+    pro = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zp = models.CharField(max_length=100)
     def __str__(self):
         return self.name
