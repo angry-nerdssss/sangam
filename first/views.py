@@ -1,4 +1,4 @@
-from .models import Organisation, Invitation, Hosting, Feedback_after_event,Feedback
+from .models import Organisation, Invitation, Hosting, Feedback_after_event, Feedback
 import math
 from .models import Organisation, Invitation
 from django.shortcuts import render, redirect, get_object_or_404, reverse
@@ -14,6 +14,16 @@ from django.contrib.auth import get_user_model
 from taggit.models import Tag
 from datetime import datetime, timedelta
 from .forms import OrganisationForm
+# organisation name
+# category
+# organisation email
+# contact no
+# description
+# motto
+# location
+# certifiacte
+# two conditions are required 1)validation of email, 2)verification by admin
+
 
 def index(request):
     return render(request, "index.html")
@@ -33,11 +43,12 @@ def register(request):
             newform.slug = slugify(organisation_name)
             newform.save()
             form.save_m2m()
-            organisation=Organisation.objects.get(organisation_name=organisation_name)
-            organisation.email=email
-            organisation.password=password
-            organisation.description=description
-            organisation.contact=contact
+            organisation = Organisation.objects.get(
+                organisation_name=organisation_name)
+            organisation.email = email
+            organisation.password = password
+            organisation.description = description
+            organisation.contact = contact
             organisation.save()
             user = User.objects.create_user(
                 username=organisation_name, email=email, password=password)
@@ -81,6 +92,8 @@ def login(request):
         return render(request, 'login.html')
 
 # this function is used to get user logged out
+
+
 def logout(request):
     auth.logout(request)
     return redirect('/')
@@ -143,7 +156,7 @@ def profile(request, slug):
     organisation = get_object_or_404(Organisation, slug=slug)
     reciever = User.objects.get(username=organisation.organisation_name)
     sender = User.objects.get(username=request.user.username)
-    feedbacks=Feedback_after_event.objects.filter(feedback_for=organisation)
+    feedbacks = Feedback_after_event.objects.filter(feedback_for=organisation)
     case = 0
     host_allow = 0
     invitation1 = Invitation.objects.filter(
@@ -168,11 +181,12 @@ def profile(request, slug):
     if case == 1 or case == 3:
         host_allow = 1
     print(case)
+
     ctx = {
         'org': organisation,
         'case': case,
         'host_allow': host_allow,
-        'feedbacks':feedbacks,
+        'feedbacks': feedbacks,
     }
     return render(request, 'profile.html', ctx)
 
@@ -271,6 +285,30 @@ def notification(request):
     return render(request, 'notification.html', ctx)
 
 
+@login_required(login_url='login')
+def hosting_event(request, slug):
+    if request.method == 'POST':
+        organisation = get_object_or_404(Organisation, slug=slug)
+        reciever = User.objects.get(username=organisation.organisation_name)
+        sender = User.objects.get(username=request.user.username)
+        date = request.POST['date']
+        venue = request.POST['venue']
+        hosting = Hosting.objects.create(
+            sender=sender, reciever=reciever, meeting_date=date, venue=venue)
+        hosting.save()
+        return redirect('profile', slug)
+    else:
+        organisation = get_object_or_404(Organisation, slug=slug)
+        reciever = User.objects.get(username=organisation.organisation_name)
+        sender = User.objects.get(username=request.user.username)
+        ctx = {
+            'sender_name': sender.username,
+            'reciever_name': reciever.username,
+            'slug': slug,
+        }
+        return render(request, 'hosting_page.html', ctx)
+
+
 def feedback_after_event(request, id):
     if request.method == 'POST':
         user = get_object_or_404(User, pk=id)
@@ -327,7 +365,6 @@ def hosting_event(request, slug):
         }
         return render(request, 'hosting_page.html', ctx)
 
-
 # this function is to take feedback
 
 
@@ -351,5 +388,6 @@ def show_feedback(request):
         'feedbacks': feedbacks,
     }
     return render(request, 'feedback.html', context)
+
 def about(request):
     return render(request, 'about.html')

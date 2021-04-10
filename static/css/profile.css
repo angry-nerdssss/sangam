@@ -32,7 +32,16 @@ textarea{
     padding-bottom:25px; /* increased! */
     display:block
 }
+
 .container .card{
+    width: 100%;
+    margin: 2rem 0;
+    padding: 2rem;
+}
+
+.card-body
+{
+    position: relative;
     width: 100%;
 }
 

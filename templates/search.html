@@ -23,7 +23,23 @@
       </form>
     </div>
   </div>
-
+  <div class="results">
+    <div class="row">
+      {% for org in organisation %}
+      <div class="col-6 col-md-4 col-lg-3 res">
+        <div class="poster">
+          <a href=""> <img src="{% static 'images/hand.jpg' %}" alt="poster"></a>
+        </div>
+        <div class="info">
+          <a style="text-decoration: none;" href="{% url 'profile' org.slug %}">
+            <h4 class="org-title">{{org.organisation_name}}</h4>
+          </a>
+          <p>{{org.category}} | {{org.city}} </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
 {% endblock content %}

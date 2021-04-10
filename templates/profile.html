@@ -6,38 +6,81 @@
 {% endblock %}
 
 {% block content %}
+
 <body>
     <div class="container">
         <h1>PROFILE</h1>
         <br>
-        <h2>{{org.organisation_name}}</h2>
-        <br>
-        <h2>{{org.contact}}</h2>
-        <br>
-        <h2>{{org.email}}</h2>
-        <br>
-        <h2>{{org.city}}</h2>
-        <br>
-        <h2>{{org.description}}</h2>
-        <br>
-        <br>
-        <a href="{% url 'django_chatter:get_chat_url2' org.slug %}" ><input type="submit" class="btn" value="CHAT WITH ORGANIZATION"></a>
+        <div class="image-div">
+            <img src="{% static 'images/profile.jpg' %}" alt="">
+        </div>
+        <div class="info">
+            <h2>{{org.organisation_name}}</h2>
+            <p>Contact details : {{org.contact}}</p>
+            <p>Email : {{org.email}}</p>
+            <p>Location : {{org.city}}</p>
+            <h5>Description:</h5>
+            <p>{{org.description}}</p>
+        </div>
+
+
+        <a href="{% url 'django_chatter:get_chat_url2' org.slug %}"><input type="submit" class="btn btn-lg btn-dark"
+                value="CHAT WITH ORGANIZATION"></a>
         {% if case is 0 %}
-        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Send Invitation"></a>
+        <a href="{% url 'send_invitation' org.slug %}"><input type="submit" class="btn btn-lg btn-dark"
+                value="Send Invitation"></a>
         {% elif case is 1 %}
-        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Invitation accepted"></a>
+        <a href="{% url 'send_invitation' org.slug %}"><input type="submit" class="btn btn-lg btn-dark disabled"
+                value="Invitation accepted"></a>
         {% elif case is 2 %}
-        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Invitation Sent"></a>
+        <a href="{% url 'send_invitation' org.slug %}"><input type="submit" class="btn btn-lg btn-dark disabled"
+                value="Invitation Sent"></a>
         {% elif case is 3 %}
-        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Invitation accepted"></a>
+        <a href="{% url 'send_invitation' org.slug %}"><input type="submit" class="btn btn-lg btn-dark disabled"
+                value="Invitation accepted"></a>
         {% elif case is 4 %}
-        <a href="{% url 'send_invitation' org.slug %}" ><input type="submit" class="btn" value="Accept Invitation"></a>
+        <a href="{% url 'send_invitation' org.slug %}"><input type="submit" class="btn btn-lg btn-dark"
+                value="Accept Invitation"></a>
         {% endif %}
         {% if host_allow is 1 %}
-        <a href="{% url 'hosting_event' org.slug %}" ><input type="submit" class="btn" value="Host The Event"></a>
+        <a href="{% url 'hosting_event' org.slug %}"><input type="submit" class=" btn btn-lg btn-dark"
+                value="Host The Event"></a>
         {% endif %}
+        <br><br><br>
+        <h1>Feedbacks of the Organisation </h1>
+        {% for feedback in feedbacks %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">By someone</h5>
+                <h6 class="card-subtitle mb-2 text-muted">NGO</h6>
+                <p>{{feedback.how_day}}</p>
+                <p>{{feedback.how_other}}</p>
+                <p>Rating :
+                    {% if feedback.rate is 1 %}
+                    <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i
+                        class="far fa-star"></i><i class="far fa-star"></i>
+                    {% elif feedback.rate is 2 %}
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
+                        class="far fa-star"></i><i class="far fa-star"></i>
+                    {% elif feedback.rate is 3 %}
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="far fa-star"></i><i class="far fa-star"></i>
+                    {% elif feedback.rate is 4 %}
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="far fa-star"></i>
+                    {% elif feedback.rate is 5 %}
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </body>
 
 {% endblock content %}
 
+{% block extra_js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
