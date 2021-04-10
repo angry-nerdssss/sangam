@@ -1,0 +1,29 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock css %}
+
+{% block content %}
+<section id="search">
+  <div class="row">
+    <div class="col-sm-6">
+      <form class="form-inline" action="search" method="POST">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search by location/Organisation name"
+          name="search_name">
+        <select class="select-chat-user form-control" name="search_type">
+          <option value="All">All</option>
+          <option value="NGOs">NGOs</option>
+          <option value="Orphanage">Orphanage</option>
+          <option value="Old Age Homes">Old age homes</option>
+        </select>
+        <button class="btn btn-outline-light form-control" type="submit">Search</button><br>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+{% endblock content %}

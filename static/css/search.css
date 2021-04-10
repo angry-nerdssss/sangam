@@ -1,0 +1,98 @@
+#footer
+{
+    display: none;
+}
+body{
+    background-image: url('../images/login.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+.form-control{
+    margin-top: 10px;
+}
+
+.form-row select{
+    margin-left: 10px;
+}
+
+#search{
+    background-color: rgb(0,0,0,0.5);
+    margin: 0 5rem;
+    height: 100vh;
+    padding: 5%;
+}
+
+.results{
+    margin: 3rem 0;
+}
+
+.res{
+    border-radius: 5%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+a:hover {
+text-decoration: none;
+}
+
+h2 {
+color: white;
+font-weight: 400;
+}
+
+.org-title {
+color: grey;
+}
+
+.org-title:hover {
+color: black;
+}
+
+.info {
+background-color: white;
+padding: 3% 10% 0.1%;
+}
+
+#footer {
+display: none;
+}
+
+.link-to-all {
+font-size: small;
+color: firebrick;
+margin: 1rem;
+}
+
+.link-to-all:hover {
+color: red;
+}
+/* 
+.page-nav {
+width: 100%;
+display: block;
+text-align: center;
+align-items: center;
+} */
+
+.page-link {
+background-color: black;
+color: grey;
+}
+
+.page-link:hover {
+background-color: gray;
+color: black;
+}
+
+.page-item.disabled .page-link {
+color: #252525;
+}

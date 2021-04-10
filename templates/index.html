@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{%load static%}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section id="top">
+    <div class="motive">
+        <h1 class="motive-line">We wish to see smiles on on the faces of all those who are joined with us</h1>
+        <h1>With this motto our work here is never done</h1>
+        <br><br>
+        <button class="join-us-btn btn btn-lg btn-outline-light">Join Us</button>
+    </div>
+    <div class="top-img-div">
+        <img class="top-img" src="{% static 'images/oldandyoungs.jpg' %}" alt="">
+    </div>
+</section>
+
+<section id="reg-section">
+    <h2 class="heading1">HOW WE SERVE YOU</h2>
+    <hr class="underline">
+    <div class="reg row">
+        <div class="orphan-reg col-md-4 col-12">
+            <i class="fas fa-search-location fa-10x"></i>
+            <br>
+            <br>
+            <h4>Search for Organisations</h4>
+        </div>
+        <div class="old-reg col-md-4 col-12">
+            <i class="far fa-handshake fa-10x"></i>
+            <br>
+            <br>
+            <h4>Schedule meetup</h4>
+        </div>
+        <div class="old-reg col-md-4 col-12">
+            <i class="fas fa-smile-beam fa-10x"></i>
+            <br>
+            <br>
+            <h4>Spread Happiness</h4>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
