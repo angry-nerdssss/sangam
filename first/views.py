@@ -90,3 +90,6 @@ def organisation_page(request):
         'organisation': organistion,
     }
     return render(request, organisation_page.html, ctx)
+
+def about(request):
+    return render(request, 'about,html')
