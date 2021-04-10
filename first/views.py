@@ -271,6 +271,39 @@ def notification(request):
     return render(request, 'notification.html', ctx)
 
 
+def feedback_after_event(request, id):
+    if request.method == 'POST':
+        user = get_object_or_404(User, pk=id)
+        organisation = Organisation.objects.get(
+            organisation_name=user.username)
+        how_day = request.POST['how_day']
+        how_other = request.POST['how_other']
+        rate = request.POST['rate']
+        hosting1 = Hosting.objects.filter(
+            sender=user).filter(reciever=request.user)
+        hosting2 = Hosting.objects.filter(
+            sender=request.user).filter(reciever=user)
+        our_organisation=get_object_or_404(Organisation,organisation_name=request.user.username)
+        if hosting1.count() == 1:
+            hosting = hosting1[0]
+            hosting.feedback_done = True
+            hosting.save()
+        else:
+            hosting = hosting2[0]
+            hosting.feedback_done = True
+            hosting.save()
+        feedback = Feedback_after_event.objects.create(feedback_by=our_organisation,
+            feedback_for=organisation, how_day=how_day, how_other=how_other, rate=rate)
+        feedback.save()
+        return redirect('notification')
+    else:
+        user = get_object_or_404(User, pk=id)
+        ctx = {
+            'feedback_for': user,
+        }
+        return render(request, 'feedback_after_event.html', ctx)
+
+
 @login_required(login_url='login')
 def hosting_event(request, slug):
     if request.method == 'POST':
