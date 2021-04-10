@@ -11,4 +11,8 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('login', views.login, name='login'),  # to call the login page
     # path('logout', views.logout, name='logout'),  # to call the logout function
+    path('profile/<slug:slug>/', views.profile, name='profile'),
+    path('profile2/<int:id>/', views.profile2, name='profile2'),
+    path('fundraise', views.fundraise, name='fundraise'),
+   
 ]
